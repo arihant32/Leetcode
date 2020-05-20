@@ -32,7 +32,7 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 
 // code :
 
-/**
+//**
  * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
@@ -46,8 +46,7 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 class Solution {
 public:
 
-    vector<int> v;
-    
+    int i=0;
     int kthSmallest(TreeNode* root, int k) {
         if(root != NULL)
         {   
@@ -56,9 +55,9 @@ public:
             if(l != INT_MAX) 
                 return l;
             
-            v.push_back(root->val);
+            i++;
             
-            if(k==v.size())
+            if(k==i)
                 return root->val; 
             
             int r = kthSmallest(root->right, k);

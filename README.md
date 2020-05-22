@@ -1,2 +1,2 @@
-# Leetcode
-All the leetcode problems code
+# competitive programming
+

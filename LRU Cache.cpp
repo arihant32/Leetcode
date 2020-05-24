@@ -26,7 +26,7 @@ cache.get(3);       // returns 3
 cache.get(4);       // returns 4
 
 **/
-
+    
 struct DoublyListNode{
     int key;
     int val;
@@ -81,15 +81,12 @@ public:
         
         Dnode* temp = front;
         
-        int key = temp->key;
-        auto it = mp.find(key); 
-        mp.erase(it); 
-        
         front = temp->next;
         if(front!=NULL)
             front->prev = NULL;
         head = front;
         
+        mp.erase(temp->key); 
         delete(temp);
         count--;   
     }
@@ -126,9 +123,6 @@ public:
     
     void delete_this_node(Dnode *tmp) {
         Dnode* temp = tmp;
-        int key = temp->key;
-        auto it = mp.find(key); 
-        mp.erase(it); 
         
         if(temp == front)
         {
@@ -148,6 +142,7 @@ public:
             temp->next->prev = temp->prev;
         }
         
+        mp.erase(temp->key); 
         delete(temp);
         count--;
     }
@@ -184,3 +179,5 @@ public:
  * obj->put(key,value);
  */
 
+ 
+     

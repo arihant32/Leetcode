@@ -92,7 +92,9 @@ public:
     }
     
     void add_node(int key, int val) {
-        if(get(key)!=-1)
+        
+        //checking if it's already exists or not
+        if(get(key) != -1)
         {
             Dnode* temp;
             temp = mp[key];
@@ -112,6 +114,7 @@ public:
         }
         else
         {
+            // adding new node at the end of doubly list
             Dnode* temp = get_new_dnode(key, val);
             temp->prev = rear;
             rear->next = temp;
@@ -122,6 +125,7 @@ public:
     }
     
     void delete_this_node(Dnode *tmp) {
+        
         Dnode* temp = tmp;
         
         if(temp == front)
@@ -138,6 +142,7 @@ public:
         }
         else
         {
+            // if it's exists somewhere b/w front and rear
             temp->prev->next = temp->next;
             temp->next->prev = temp->prev;
         }
@@ -178,6 +183,3 @@ public:
  * int param_1 = obj->get(key);
  * obj->put(key,value);
  */
-
- 
-     

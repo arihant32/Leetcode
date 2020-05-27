@@ -57,6 +57,7 @@ public:
             if(color[i] == 0) 
             {
                 color[i] = 1;
+                // taking queue for BFS
                 queue<int> q;
                 q.push(i);
                 while(!q.empty())

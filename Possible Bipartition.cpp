@@ -1,6 +1,6 @@
 /**
 
-Possible Bipartition
+Possible Bipartition or (this problem same as to find Bipartite graph in a graph)
 
 Given a set of N people (numbered 1, 2, ..., N), we would like to split everyone into two groups of any size.
 

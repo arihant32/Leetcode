@@ -55,3 +55,31 @@ public:
         return ans;
     }
 };
+
+
+// 2nd and best approach
+
+class Solution {
+public:
+    
+    vector<int> countBits(int num) {
+        vector<int> ans;
+        ans.push_back(0);
+        if(num == 0) return ans;
+        // logic
+        // num is even then number of set bit in num is no of set bit in num/2
+        // num is odd then number of set bit in num is no of set bit in num/2 + 1
+        for(int i=1; i <=num; i++) {
+            // odd
+            if(i & 1) {
+               ans.push_back(ans[i/2]+1);
+            }
+            // even
+            else {
+                ans.push_back(ans[i/2]);
+            }   
+        }
+        
+        return ans;
+    }
+};

@@ -39,12 +39,13 @@ Note:
 # @return {Integer[][]}
 
 def k_closest(points, k)
-    # Distance b/w two points P(x1,y1) and Q(x2,y2) is given by: d(P, Q) = √ (x2 − x1)2 + (y2 − y1)2       # Distance of a point P(x, y) from the origin (0, 0) is given by d(0,P) = √ x2 + y2
+    # Distance b/w two points P(x1,y1) and Q(x2,y2) is given by: d(P, Q) = √ (x2 − x1)2 + (y2 − y1)2       
+    # Distance of a point P(x, y) from the origin (0, 0) is given by d(0,P) = √ x2 + y2
     res = Array.new
     hh = Hash.new
     i = 0
     points.each do |p|
-        # calculating distance of each given point and storing in hash with key it's index and value           # is distance
+        # calculating distance of each given point and storing in hash with key it's index and value is distance
         hh[i] =  p[0]*p[0] + p[1]*p[1]
         i += 1
     end

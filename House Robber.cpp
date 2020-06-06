@@ -43,3 +43,29 @@ public:
         return get_max_money(nums, 0, nums.size());
     }
 };
+
+
+// DP memoization solution
+
+
+class Solution {
+public:
+    
+    int get_max_money(vector<int>& nums, vector<int>& dp, int i, int n)
+    {
+        if(i>=n) return 0;
+        if(dp[i]!=-1) return dp[i];
+        int with_rob = nums[i] + get_max_money(nums, dp, i+2, n);
+        int without_rob = get_max_money(nums, dp, i+1, n);
+        dp[i] = max(with_rob, without_rob);
+        return dp[i];
+    }
+    int rob(vector<int>& nums) {
+        int ln = nums.size();
+        vector<int> dp(ln, -1);
+        return get_max_money(nums, dp, 0, ln);
+    }
+};
+
+
+// DP Solution

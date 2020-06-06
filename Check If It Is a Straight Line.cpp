@@ -27,6 +27,9 @@ public:
     bool checkStraightLine(vector<vector<int>>& cor) {
         int n = cor.size(),i=1;
         float initial,slpoe;
+       
+        // slope = {y_2 - y_1}{x_2 - x_1}
+
         initial = float(cor[1][1]-cor[0][1])/float(cor[1][0]-cor[0][0]);
         while(i<n-1)
         {

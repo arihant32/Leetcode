@@ -55,3 +55,27 @@ public:
         return get_combinations(amount, coins, 0, coins.size());
     }
 };
+
+
+// DP
+
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        if(coins.empty() && amount==0) return 1;
+        if(coins.empty()) return 0;
+        
+        int ln = coins.size();
+        vector<vector<int>>dp (ln+1, vector<int>(amount+1, 0));
+        
+        for(int i=0; i<=ln; i++)
+            dp[i][0] = 1;
+        
+        for(int i=1; i<=ln; i++) {
+            for(int j=0; j<=amount; j++) {
+                dp[i][j] = dp[i-1][j] + (j-coins[i-1]<0 ? 0 : dp[i][j-coins[i-1]]); 
+            }
+        }
+        return dp[ln][amount];
+    }
+};

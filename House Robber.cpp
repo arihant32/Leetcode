@@ -69,3 +69,25 @@ public:
 
 
 // DP Solution
+
+
+class Solution {
+public:
+    
+    int rob(vector<int>& nums) {
+        if(nums.empty()) return 0;
+        int ln = nums.size();
+        if(ln == 1) return nums[0];
+        vector<int>dp(ln);
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
+        for(int i=2; i<ln; i++) {
+            //current house + 1 house previous
+            // or previous
+            // [0] [1] [2]
+            dp[i] = max(nums[i]+dp[i-2], dp[i-1]);
+        }
+        
+        return dp[ln-1];
+    }
+};

@@ -108,3 +108,6 @@ public:
     }
 };
 
+
+// another and good solution : https://www.youtube.com/watch?v=IpBfg9d4dmQ
+

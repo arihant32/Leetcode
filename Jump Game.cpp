@@ -48,3 +48,28 @@ public:
         return dp[ln-1] == INT_MAX ? false : true;
     }
 };
+
+
+
+// solution 2 : most efficient
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        if(nums.empty()) return true;
+        int ln = nums.size();
+        // as we need to go to the end
+        int target_index = ln-1;
+        
+        for(int i=ln-2; i>=0; i--) {
+            //from it's left most index can we reach to target index 
+            // if yes then update the new target index 
+            if(i+nums[i] >= target_index)
+                target_index = i;
+                
+        }
+        // if finally we reached at start that means target_index would be zero
+        // so we can say that we have a path from start to end
+        return target_index==0 ? true : false;
+    }
+};

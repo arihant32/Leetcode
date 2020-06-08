@@ -45,3 +45,35 @@ public:
         return get_max(temp);
     }
 };
+
+
+
+// or
+
+
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        
+        if(nums.empty()) return 0;
+        
+        int ln = nums.size();
+        if(ln==1) return 1;
+        
+        // as all element itselt LIS of 1 length
+        vector<int> dp(ln, 1);
+        int max_so_far = 1;
+        
+        for(int i=1; i<ln; i++) {
+            for(int j=0; j<i; j++) {
+                if(nums[j] < nums[i]) {
+                    dp[i] = max(dp[i], 1+dp[j]);
+                    if(dp[i] > max_so_far) 
+                        max_so_far = dp[i];    
+                }
+                    
+            }
+        }
+        return max_so_far;
+    }
+};

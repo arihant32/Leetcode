@@ -45,10 +45,6 @@ public:
             }
         }
         
-        for(int i=0; i<ln; i++) {
-            if(dp[i] == INT_MAX)
-                return false;
-        }
-        return true;
+        return dp[ln-1] == INT_MAX ? false : true;
     }
 };

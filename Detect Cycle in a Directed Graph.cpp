@@ -21,23 +21,27 @@ int n;
 // Appying DFS
 bool isCycle(int vertex, vector<vector<int>> &graph, vector<bool> &visited, vector<bool> &recStack) {
     
-    visited[vertex] = true;
-    recStack[vertex] = true;
-    
-    for(int i=0; i<n; i++)
+    if(visited[vertex] == false) 
     {
-        if(graph[vertex][i] == 1)
+        visited[vertex] = true;
+        recStack[vertex] = true;
+    
+        for(int i=0; i<n; i++)
         {
-            if(visited[i]==false)
+            if(graph[vertex][i] == 1)
             {
-                if(isCycle(i, graph,visited,recStack))
+                if(visited[i]==false)
+                {
+                    if(isCycle(i, graph,visited,recStack))
+                        return true;
+                }
+                else if(recStack[i])
                     return true;
             }
-            else if(recStack[i])
-                return true;
         }
-    }
     
+    }
+    // remove the vertex from recursion stack 
     recStack[vertex] = false;
     return false;
 }

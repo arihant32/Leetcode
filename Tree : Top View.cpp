@@ -120,3 +120,34 @@ class Node {
     }
 
 }; //End of Solution
+
+
+
+
+// 2nd solution
+
+    void fillMap(Node* root,int hd,int l,map<int,pair<int,int>> &m) { 
+        if(root==NULL) return; 
+  
+        if(m.find(hd)==m.end()) 
+            m[hd] = {root->data,l};
+        else if(m[hd].second>l)
+            m[hd] = {root->data,l};
+  
+        fillMap(root->left,hd-1,l+1,m); 
+        fillMap(root->right,hd+1,l+1,m); 
+    } 
+  
+    void topView(Node * root) {
+        map<int,pair<int,int>> m; 
+        //fillmap(root,vectical_distance_from_root,level_of_node,map) 
+        fillMap(root,0,0,m); 
+        for(auto it=m.begin();it!=m.end();it++){ 
+            cout << it->second.first << " "; 
+         } 
+    }
+
+    
+    }
+
+}; //End of Solution

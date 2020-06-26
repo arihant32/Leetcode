@@ -57,3 +57,61 @@ public:
         return nums[ln- k];
     }
 };
+
+
+
+// more efficient solution 
+
+
+
+class Solution {
+public:
+    
+    // Min heap code
+    void heapify(vector<int> &arr, int i, int k) {
+        
+        int l = 2*i+1;
+        int r = 2*i+2;
+        int lar = i;
+        
+        if(l<k && arr[l]<arr[lar])
+            lar = l;
+        
+        if(r<k && arr[r]<arr[lar])
+            lar = r;
+        
+        if(i!=lar) {
+            int t = arr[i];
+            arr[i] = arr[lar];
+            arr[lar] = t;
+            heapify(arr, lar, k);
+        }
+        
+    }
+    int findKthLargest(vector<int>& nums, int k) {
+        
+        // taking k size space to build min heap
+        vector<int> arr(k);
+        // inserting my first k elements to arr
+        for(int i=0; i<k; i++)
+            arr[i] = nums[i];
+        
+        //now making min heap of size k => T.C (k long k)
+        for(int i = (k/2)-1; i>=0; i--){
+            heapify(arr, i, k);
+        }
+        
+        // checking now rest elements
+        for(int i=k; i<nums.size(); i++) {
+            // if value >= to min heap root then insert in my min heap root and heapify
+            // and value < of min heap root then do nothing
+            if(nums[i]>=arr[0]) {
+                arr[0] = nums[i];
+                heapify(arr, 0, k);
+            }
+        }
+        
+        return arr[0];
+        
+    }
+};

@@ -101,3 +101,6 @@ public:
         return resutl;
     }
 };
+
+
+// another good solution : https://www.youtube.com/watch?v=nPtARJ2cYrg

@@ -41,13 +41,14 @@ public:
     
     bool DFS(vector<vector<char>> &board,int i, int j, vector<vector<bool>> &visited, string word, int index) {
         
-        if(str.compare(word) == 0) return true;
-        
         if(i<0 || i>=r || j<0 || j>=c || visited[i][j] == true) return false;
         
         if(board[i][j]!=word[index]) return false;
-    
+        
         str = str + board[i][j];
+        
+        if(str.compare(word) == 0) return true;
+        
         visited[i][j] = true;
         
         for(int k=0; k<4; k++) {

@@ -79,3 +79,94 @@ public:
 };
 
 
+
+// Trie solution
+
+
+class Tnode{
+    
+    public:
+    
+        Tnode *child[26];
+        bool is_word; //end of string
+
+        Tnode() {
+            for(int i=0; i<26; i++) child[i] = NULL;
+            is_word = false;
+        }
+
+};
+
+class Solution {
+    
+    public:
+
+        int r,c;
+        int x_dir[4] = {-1, 0, 0, 1};
+        int y_dir[4] = {0, -1, 1, 0};
+        vector<string> result;
+        Tnode *root;
+
+        void insert(string word) {
+            Tnode *ptr = root;
+            int ln = word.size();
+            int i=0;
+            while(i<ln)
+            {
+                int ind = word[i]-'a';
+                if(ptr->child[ind] == NULL)
+                    ptr->child[ind] = new Tnode();
+                ptr = ptr->child[ind];
+                i++;
+            }
+            ptr->is_word = true;
+         }
+    
+        void dfs(vector<vector<char>>& board, int i, int j, string word, vector<vector<bool>> &visited, Tnode *node) {
+        
+        if(i<0 || i>=r || j<0 || j>=c || visited[i][j] || node->child[board[i][j]-'a'] == NULL)
+            return;
+        
+        visited[i][j] = true;
+        
+        node = node->child[board[i][j]-'a'];
+        
+        if(node->is_word) {
+             result.push_back(word + board[i][j]);
+             node->is_word = false;
+        }
+            
+            
+        for(int k=0; k<4; k++)
+            dfs(board, i+x_dir[k], j+y_dir[k], word + board[i][j], visited, node);
+
+        visited[i][j] = false;
+    }
+    
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+
+        r = board.size();
+        c = board[0].size();
+        int w_ln = words.size();
+
+        root = new Tnode();
+
+        for(int i=0; i<w_ln; i++) insert(words[i]);
+        
+        vector<vector<bool>> visited(r, vector<bool>(c,false));
+
+        for(int i=0; i<r; i++) {
+            for(int j=0; j<c; j++) {
+                char c = board[i][j];
+                if(root->child[c-'a'] != NULL)
+                    dfs(board,i, j, "" , visited, root);
+            }
+        }
+
+        return result;
+    }
+};
+
+
+
+

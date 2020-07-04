@@ -49,6 +49,7 @@ class Solution {
 public:
     vector<int> prisonAfterNDays(vector<int>& cells, int N) {
         int prev,curr,next;
+        // Found a common pattern that the sequence repeats every 14 days
         N=N%14;
         if(N==0) N=14;
         

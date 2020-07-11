@@ -26,9 +26,10 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
 class Solution {
 public:
-    ListNode* swap(ListNode* head) {
+    ListNode* swapPairs(ListNode* head) {
         if(head == NULL || head->next == NULL) return head;
         ListNode* current = head, *prev = NULL;
         int cnt=0;
@@ -40,11 +41,7 @@ public:
             cnt++;
         }
         if(current)
-            head->next = swap(current);
-        return prev;
-    }
-    
-    ListNode* swapPairs(ListNode* head) {
-        return swap(head);   
+            head->next = swapPairs(current);
+        return prev;  
     }
 };

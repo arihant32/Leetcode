@@ -44,3 +44,42 @@ public:
         return get_max_profit(prices, 0, true);
     }
 };
+
+
+
+// with memoization
+
+
+class Solution {
+public:
+    
+    map<string, int> mp;
+    
+    int get_max_profit(vector<int>& prices, int i, bool buy_or_sell) {
+        if(i>=prices.size()) return 0;
+        
+        string key = to_string(i);
+        key = buy_or_sell ? key+"buy" : key+"sell";
+        
+        if(mp.find(key) != mp.end())
+            return mp[key];
+        
+        int max_pro=0;
+        if(buy_or_sell) {
+            int buy = get_max_profit(prices, i+1, false) - prices[i];
+            int no_buy = get_max_profit(prices, i+1, true);
+            max_pro = max(buy, no_buy);
+        }else{
+            int sell = get_max_profit(prices, i+2, true) + prices[i];
+            int no_sell = get_max_profit(prices, i+1, false);
+            max_pro = max(sell, no_sell);
+        }
+        
+        mp[key] = max_pro;
+        return max_pro;
+    }
+    int maxProfit(vector<int>& prices) {
+        // true -> buy, flase -> sell
+        return get_max_profit(prices, 0, true);
+    }
+};

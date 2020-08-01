@@ -1,4 +1,4 @@
-/*
+=begin
 
 Logger Rate Limiter
 
@@ -30,7 +30,7 @@ logger.shouldPrintMessage(10,"foo"); returns false;
 // logging string "foo" at timestamp 11
 logger.shouldPrintMessage(11,"foo"); returns true;
 
-*/
+=end
 
 
 

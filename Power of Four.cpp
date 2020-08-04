@@ -31,3 +31,19 @@ public:
         return false;
     }
 };
+
+
+
+// solution
+
+class Solution {
+public:
+    bool isPowerOfFour(int num) {
+        if(num<=0) return false;
+        if(!(num & num-1)) {
+            int l = log2(num & -num);
+            return l%2==0 ? true : false;
+        }
+        return false;
+    }
+};

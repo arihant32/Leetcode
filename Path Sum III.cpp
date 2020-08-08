@@ -55,7 +55,7 @@ public:
     }
     void inorder(TreeNode* root, int sum) {
         if(root==NULL) return;
-        // doing inorder traversal and one by one checking for all the nodes if there is any path from         // root that has sum equal to given sum.
+        // doing inorder traversal and one by one checking for all the nodes if there is any path from root that has sum equal to given sum.
         findPathRootToLeaf(root, sum);
         inorder(root->left, sum);
         inorder(root->right, sum);

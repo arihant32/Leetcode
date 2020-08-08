@@ -52,6 +52,7 @@ public:
     
     int closestValue(TreeNode* root, double target) {
         // calculating initial only for further comparison
+        // then do preorder traversal
         min = abs(root->val - target);
         closest = root->val;
         findClosest(root, target);

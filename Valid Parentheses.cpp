@@ -31,42 +31,27 @@ Output: true
 
 **/
 
-class Solution {
+cclass Solution {
 public:
     bool isValid(string str) {
-        
         stack<char> s;
-        int ln = str.size();
-        int i=0;
-        while(i<ln)
+        for(int i=0; i<str.size(); i++)
         {
             if(str[i]=='(' || str[i]=='['|| str[i]=='{')
                 s.push(str[i]);
             else if (!s.empty())
             {
-                //cout<<"char="<<s.top()<<"\n";
-                if((str[i] == ')' && s.top() == '(') || (str[i] == ']' && s.top() == '[') || (str[i] == '}' && s.top() == '{') )
-                {
+                char c = str[i];
+                char top = s.top();
+                if((c == ')' && top == '(') || (c == ']' && top == '[') || (c == '}' && top == '{') )
                     s.pop();
-                 }
                 else
-                {
                     return false;
-                }
             }
             else
-            {
                 return false;
-            }
-            i++;
         }
 
-        if(s.empty())
-            return true;
-        else
-            return false;
-
-    
-        
+        return s.empty() ? true : false; 
     }
 };

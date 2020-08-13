@@ -43,6 +43,7 @@ public:
     void generate(string s, string result, int index, int cln) {
         if(cln==result.size()){
             q.push(result);
+            return;
         }
         for(int i=index; i<s.size(); i++){
             generate(s, result+s[i], i+1, cln);

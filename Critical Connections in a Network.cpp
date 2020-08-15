@@ -1,6 +1,6 @@
 /*
 
-Critical Connections in a Network
+Critical Connections in a Network : https://www.youtube.com/watch?v=CsGP_s_3GWg&t=1s
 
 There are n servers numbered from 0 to n-1 connected by undirected server-to-server connections forming a network where connections[i] = [a, b] represents a connection between servers a and b. Any server can reach any other server directly or indirectly through the network.
 

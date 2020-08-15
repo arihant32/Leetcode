@@ -38,7 +38,7 @@ public:
         // sort vector based on end time
         sort(intervals.begin(), intervals.end(), myCompare);
         int count = 0;
-        int initial_end_time = intervals[0][0];
+        int initial_end_time = intervals[0][0]; // assign initial value that is first interval start time
         for(auto interval : intervals) {
             // interval[0] -> start time
             // interval[1] -> end time

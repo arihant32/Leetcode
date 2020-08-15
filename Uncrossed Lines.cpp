@@ -46,16 +46,16 @@ public:
         int a_ln = A.size();
         int b_ln = B.size();
         
-        vector<vector<int>> mat(a_ln+1, vector<int> (b_ln+1));
+        vector<vector<int>> mat(a_ln+1, vector<int> (b_ln+1, 0));
         
-        for(int i=0; i<a_ln; i++)
+        for(int i=1; i<=a_ln; i++)
         {
-            for(int j=0; j<b_ln; j++)
+            for(int j=1; j<=b_ln; j++)
             {
-                if(A[i] == B[j])
-                    mat[i+1][j+1] = mat[i][j] + 1;
+                if(A[i-1] == B[j-1])
+                    mat[i][j] = mat[i-1][j-1] + 1;
                 else
-                    mat[i+1][j+1] = max(mat[i+1][j], mat[i][j+1]);
+                    mat[i][j] = max(mat[i][j-1], mat[i-1][j]);
             }
         }
         return mat[a_ln][b_ln];

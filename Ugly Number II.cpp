@@ -2,6 +2,8 @@
 
 Ugly Number II
 
+https://www.youtube.com/watch?v=78Yx7oLA43s
+
 Write a program to find the n-th ugly number.
 
 Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. 

@@ -42,3 +42,23 @@ public:
         return max_profit;
     }
 };
+
+
+
+
+// 2nd sol
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int ln = prices.size();
+        if (ln==0 || ln==1) return 0;
+        int min = prices[0];
+        int max_profit = 0;
+        for(int i=0; i<ln; i++) {
+            if(prices[i] < min) min = prices[i];
+            max_profit = max(max_profit, prices[i] - min);
+        }
+        return max_profit;
+    }
+};

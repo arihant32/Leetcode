@@ -2,6 +2,8 @@
 
 Link : https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3328/
 
+https://www.youtube.com/watch?v=3QJzHqNAEXs&t=12s
+
 Given a non-negative integer num represented as a string, remove k digits from the number so that the new number is the smallest possible.
 
 Note:

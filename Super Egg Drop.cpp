@@ -66,3 +66,35 @@ public:
     }
 };
 
+
+// solution 2nd with memorization
+
+
+class Solution {
+public:
+    
+    vector<vector<int>> dp;
+    
+    int solve(int e, int f) {
+        // e -> egg
+        // f -> number of floor in the building
+        if(f==0 || f==1) return f;
+        if(e==1) return f;
+        if(dp[e][f]!=-1) return dp[e][f];
+        
+        int result = INT_MAX;
+        for(int k=1; k<=f; k++) {
+            int temp = 1 + max(solve(e-1, k-1), solve(e, f-k));
+            result = min(result, temp);
+        }
+        dp[e][f] = result;
+        return result;
+    }
+    int superEggDrop(int K, int N) {
+        dp.resize(K+1,vector<int> (N+1,-1));
+        return solve(K, N);
+    }
+};
+
+
+

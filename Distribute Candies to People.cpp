@@ -56,7 +56,7 @@ public:
             }   
             else{
                 distribution[index] += candies;
-                candies = 0;
+                break;
             }
             assign_can++;
             i++;

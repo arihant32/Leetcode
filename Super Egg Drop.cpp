@@ -56,7 +56,7 @@ public:
         if(e==1) return f;
         int result = INT_MAX;
         for(int k=1; k<=f; k++) {
-            int temp = 1 + max(superEggDrop(e-1, k-1), superEggDrop(e, f-k));
+            int temp = 1 + max(solve(e-1, k-1), solve(e, f-k));
             result = min(result, temp);
         }
         return result;

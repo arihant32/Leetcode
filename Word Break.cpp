@@ -34,6 +34,7 @@ class Solution {
 public:
     
     bool solve(string s, vector<string>& wordDict) {
+        // if anytime our 's' become empty "" then we can say we found the answer
         if(s.size() == 0) return true;
         // using all words one by one
         for(int i=0; i<wordDict.size(); i++){

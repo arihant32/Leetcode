@@ -2,6 +2,8 @@
 
 Word Break
 
+https://www.youtube.com/watch?v=1U4jQusbeJc
+
 
 Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
 
@@ -54,5 +56,40 @@ public:
     }
     bool wordBreak(string s, vector<string>& wordDict) {
        return solve(s, wordDict);
+    }
+};
+
+
+// memo solution
+
+class Solution {
+public:
+    
+    bool solve(string s, vector<string>& wordDict, unordered_map<string, bool> &memo) {
+        // if anytime our 's' become empty "" then we can say we found the answer
+        if(s.size() == 0) return true;
+        if(memo[s]) return memo[s];
+        // using all words one by one
+        for(int i=0; i<wordDict.size(); i++){
+            // say wordDict = ["leet", "code"] and s = "leetcode"
+            // so will take the 1st word that is "leet" from wordDict
+            // and now take the prefix from string s with same length of above taken word
+            // if our word and prefix is same then pass the remaining 's' to recorsive function and so on
+            string w = wordDict[i];
+            string prefix = s.substr(0, w.size()); // taking prefix
+            if(w.compare(prefix) == 0) { // if both are same
+                string new_s = s.substr(prefix.size()); // taking remaining string s that is 'code'
+                if(solve(new_s, wordDict, memo)) {
+                    memo[s] = true;
+                    return true;  
+                }
+            }
+        }
+        memo[s] = false;
+        return false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+       unordered_map<string, bool> memo;
+       return solve(s, wordDict, memo);
     }
 };

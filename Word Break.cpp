@@ -93,3 +93,33 @@ public:
        return solve(s, wordDict, memo);
     }
 };
+
+
+// solution 3rd
+
+
+class Solution {
+public:
+    
+    bool solve(string s, unordered_set<string> &myset) {
+        
+        if(s.size() == 0) return true;
+        
+        for(int i=0; i<=s.size(); i++) {
+            string prefix = s.substr(0,i);
+            if(myset.find(prefix) != myset.end()) {
+                string remaining_str = s.substr(i);
+                if(solve(remaining_str, myset)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        // assign all wordDict to set
+        unordered_set<string> myset(wordDict.begin(), wordDict.end());
+        return solve(s, myset);
+    }
+};
+

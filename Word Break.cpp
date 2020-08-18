@@ -28,7 +28,7 @@ Output: false
 */
 
 
-// Solution one :
+// Solution one : Brute force
 
 class Solution {
 public:

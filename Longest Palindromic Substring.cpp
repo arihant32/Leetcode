@@ -16,6 +16,62 @@ Output: "bb"
 
 **/
 
+
+
+// Solution One without DP
+
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int ln = s.size();
+        if(ln==0) return "";
+        int max_len = 0;
+        int start = 0, end = 0;
+        for(int i=0; i<ln; i++) {
+            // odd length
+            int l = i-1;
+            int h = i+1;
+            while(l<h) {
+                if(l>=0 && h<ln && s[l] == s[h]) {
+                    if(h-l+1 > max_len) {
+                        max_len = h-l+1;
+                        start = l;
+                        end = h;
+                    }
+                    l--;
+                    h++;
+                } else{
+                    break;
+                }
+            }
+            // even length
+            l = i;
+            h = i+1;
+            while(l<h) {
+                if(l>=0 && h<ln && s[l] == s[h]) {
+                    if(h-l+1 > max_len) {
+                        max_len = h-l+1;
+                        start = l;
+                        end = h;
+                    }
+                    l--;
+                    h++;
+                } else{
+                    break;
+                }
+            }
+            
+        }
+        string ps = "";
+        for(int i=start; i<=end; i++) ps += s[i];
+        return ps;
+    }
+};
+
+
+
+// Solution two with DP
 class Solution {
 public:
     string longestPalindrome(string s) {

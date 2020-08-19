@@ -33,7 +33,7 @@ public:
         reverse(rs.begin(), rs.end());
         //cout<<rs;
         // Now using Longest Common Subsequence code 
-        // for string 's' and reverse string 'rs'
+        // and using string 's' and reverse string 'rs'
         for(int i=1; i<=ln; i++) {
             for(int j=1; j<=ln; j++) {
                 if(s[i-1] == rs[j-1]) {

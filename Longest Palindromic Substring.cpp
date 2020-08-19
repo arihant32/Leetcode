@@ -72,66 +72,84 @@ public:
 
 
 // Solution two with DP
+
+
 class Solution {
 public:
     string longestPalindrome(string s) {
+        int ln = s.size();
+        if(ln==0) return "";
+        vector<vector<bool>> dp(ln, vector<bool>(ln, false));
         
-         int ln = s.size();
-    vector<vector<int>> v(ln,vector<int> (ln,0));
-    for(int i=0;i<ln;i++)
-    {
-        for(int j=0;j<ln;j++)
-        {
-            if(i==j) v[i][j] = 1;
-        }
-    }
-    
-    for(int k=0;k<ln;k++)
-    {
-        int i=0;
-        for(int j=k+1;j<ln;j++)
-        {
-            if(s[i]!=s[j]){
-                  v[i][j]=0;
-            }
-            else{
-                 v[i][j]=(v[i+1][j-1] || (v[i][j-1] && abs(i-j)==1));
-            }
-            i++;
+        // char with one length is always palindrome
+        // Eg :  "baabad"
+        
+        for(int i=0; i<ln; i++) {
+            dp[i][i] = true;
         }
         
-    }
-    
+        // for(int i=0; i<ln; i++) {
+        //     for(int j=0; j<ln; j++) {
+        //         cout<<dp[i][j]<<" ";
+        //     }
+        //     cout<<"\n";
+        // }
+                 // End
+            // 1 0 0 0 0 0 
+            // 0 1 0 0 0 0 
+   //start  // 0 0 1 0 0 0 
+            // 0 0 0 1 0 0 
+            // 0 0 0 0 1 0 
+            // 0 0 0 0 0 1 
 
-    int cnt=0;
-    int start_one=0,end_one=0,a=0,b=0;
-    for(int i=0;i<ln;i++)
-    {
-        for(int j=i;j<ln;j++)
-        {
-            if(v[i][j]==1)
-            {
-                start_one = i;
-                end_one = j;
+        // Now Store all two length palindrome if s[i]==s[i+1] then is a palindrome of two lenght eg : bb 
+        for(int i=0; i<ln-1; i++) {
+            if(s[i] == s[i+1]) {
+                dp[i][i+1] = true;
             }
         }
-        if((end_one-start_one)>=cnt)
-        {
-            a=start_one;
-            b=end_one;
-            cnt = end_one-start_one;
-        }
-
-    }
- 
-    string nstr="";
-    while(a<=b)
-    {
-        nstr+=s[a];
-        a++;
-    }
-
-    return nstr;
         
+        // 1 0 0 0 0 0 
+        // 0 1 1 0 0 0 
+        // 0 0 1 0 0 0 
+        // 0 0 0 1 0 0 
+        // 0 0 0 0 1 0 
+        // 0 0 0 0 0 1 
+        
+        // for all three and greater length string 
+        // so 'bab' is a palindrome if first and last char are same and inner substring is palindrome so           // over all string is palindrome.
+        
+        for(int k=0; k<ln-2; k++) {
+            int i=0;
+            for(int j=k+2; j<ln; j++) {
+                if(s[i]==s[j] && dp[i+1][j-1]==true) {
+                    dp[i][j] = true;
+                }
+                i++;
+            }
+        }
+        
+        // now get the Longest Palindromic Substring
+        int start = 0, end = 0, count = 0;
+        for(int i=0; i<ln; i++) {
+            for(int j=0; j<ln; j++) {
+                if(dp[i][j]==true) {
+                    if(j-i+1>count) {
+                        count = j-i+1;
+                        start = i;
+                        end = j;
+                    }
+                }
+            }
+        }
+        
+        string ps="";
+        while(start<=end)
+        {
+            ps+=s[start];
+            start++;
+        }
+        
+        return ps;
     }
 };

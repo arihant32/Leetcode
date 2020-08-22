@@ -29,36 +29,35 @@ The input is two lists: the subroutines called and their arguments. Solution's c
 
 class Solution {
 public:
-    
-    vector<int> temp;
-    int sum;
-    
+    int sum = 0;
+    int ln = 0;
+    vector<int> cumulative;
     Solution(vector<int>& w) {
-        // calculating cumulative sum and total array sume
-        sum = 0;
-        for(int i=0; i<w.size(); i++) 
-        {
-            sum = sum + w[i];
-            temp.push_back(sum);
+        ln = w.size();
+        for(auto val : w) {
+            sum = sum + val;
+            cumulative.push_back(sum);
         }
     }
     
-    int get_index(int rn) {
+    int get_index(int r) {
         int l = 0;
-        int r = temp.size()-1;
-        while(l<r)
-        {
-            int mid = (l+r)/2;
-            if(temp[mid] < rn)
-                l = mid+1;
+        int h = ln -1;
+        while(l<h) {
+            int m = (l+h)/2;
+            if(cumulative[m] < r)
+                l = m+1;
             else
-                r = mid;
+                h = m;
         }
         return l;
     }
     int pickIndex() {
-        int rn = rand()%sum + 1;
-        return get_index(rn);    
+        // let say my sum is 5 so i need to generate numbers that has equal probability 
+        // that is 1, 2, 3, 4, 5
+        // if simple take modulo, it will give 0, 1, 2 3, 4 so adding 1 for all the number
+        int r = (rand()%sum)+1;
+        return get_index(r);
     }
 };
 

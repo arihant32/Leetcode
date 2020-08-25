@@ -86,3 +86,47 @@ public:
         return getMicCost(days, costs, 0);
     }
 };
+
+
+
+
+// solution two : using memo
+
+
+class Solution {
+public:
+    
+    vector<int> dp;
+    
+    int getMicCost(vector<int>& days, vector<int>& costs, int index) {
+        if(index >= days.size()) return 0;
+        if(dp[index] != -1) return dp[index];
+        // taking one day pass and going to next day 
+        int option_1 = costs[0] + getMicCost(days, costs, index+1);
+        
+        
+        // from present day taking 7 days pass and will buy it again agter 7 days
+        // eg : 1 2 3 4 5 6 7 8 9 10 11 12 13 say if we at 3rd day then we can go up to 9 and will again buy pass at 10th day
+        int i;
+        for(i = index; i<days.size(); i++) {
+            if(days[i] >= days[index]+7) break;
+        }
+        int option_2 = costs[1] + getMicCost(days, costs, i);
+        
+        // from present day taking 30 days pass and will buy it again agter 30 days
+        int j;
+        for(j = index; j<days.size(); j++) {
+            if(days[j] >= days[index]+30) break;
+        }
+        int option_3 = costs[2] + getMicCost(days, costs, j);
+        
+        // now retuning min of all the three options that is 1 day pass, 7 day pass and 30 day pass
+        dp[index] = min(option_1, min(option_2, option_3));
+        return dp[index];
+    }
+    
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        dp.resize(days.size(), -1);
+        return getMicCost(days, costs, 0);
+    }
+};

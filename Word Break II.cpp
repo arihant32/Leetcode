@@ -85,3 +85,49 @@ public:
     }
 };
 
+
+
+// or we can solve like below as well
+
+
+
+class Solution {
+public:
+    
+    unordered_set<string> word_set;
+    vector<string> results;
+    vector<string> temp;
+    
+    void solve(string s) {
+        
+        if(s.size() == 0) {
+           string ans = "";
+           int k;
+           for(k=0; k<temp.size()-1; k++) {
+               ans += temp[k] + " ";
+           }
+           //in last string no need to add space so above loop till temp.size()-1
+           ans += temp[k];
+           results.push_back(ans); 
+        }
+        
+        for(int i=0; i<=s.size(); i++) {
+            string prefix = s.substr(0,i);
+            if(word_set.find(prefix) != word_set.end()) {
+                temp.push_back(prefix);
+                string remaining_str = s.substr(i);
+                solve(remaining_str);
+                temp.pop_back();
+            }
+        }
+    }
+    
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        // assign all wordDict to set
+        for(auto word : wordDict) {
+            word_set.insert(word);
+        }
+        solve(s);
+        return results;
+    }
+};

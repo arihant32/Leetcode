@@ -131,3 +131,48 @@ public:
         return results;
     }
 };
+
+
+// with memo
+
+class Solution {
+public:
+    
+    unordered_set<string> word_set;
+    unordered_map<string, vector<string>> umap;
+    
+    vector<string> solve(string s) {
+        
+        if(umap.find(s) != umap.end()) return umap[s];
+        
+        vector<string> results;
+        
+        if(s.size() == 0) {
+            results.push_back("");
+            return results;
+        }
+        
+        for(int i=0; i<=s.size(); i++) {
+            string prefix = s.substr(0,i);
+            if(word_set.find(prefix) != word_set.end()) {
+                string remaining_str = s.substr(i);
+                vector<string> answers = solve(remaining_str);
+                for(auto ans : answers) {
+                    ans = (ans == "" ? ans : " " + ans);
+                    results.push_back(prefix + ans);
+                }
+            }
+        }
+        
+        umap[s] = results;
+        return results;
+    }
+    
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        // assign all wordDict to set
+        for(auto word : wordDict) {
+            word_set.insert(word);
+        }
+        return solve(s);
+    }
+};

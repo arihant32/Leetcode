@@ -101,15 +101,17 @@ public:
 class Solution {
 public:
     
-    bool solve(string s, unordered_set<string> &myset) {
+    unordered_set<string> word_set;
+    
+    bool solve(string s) {
         
         if(s.size() == 0) return true;
         
         for(int i=0; i<=s.size(); i++) {
             string prefix = s.substr(0,i);
-            if(myset.find(prefix) != myset.end()) {
+            if(word_set.find(prefix) != word_set.end()) {
                 string remaining_str = s.substr(i);
-                if(solve(remaining_str, myset)) {
+                if(solve(remaining_str)) {
                     return true;
                 }
             }
@@ -118,8 +120,47 @@ public:
     }
     bool wordBreak(string s, vector<string>& wordDict) {
         // assign all wordDict to set
-        unordered_set<string> myset(wordDict.begin(), wordDict.end());
-        return solve(s, myset);
+        for(auto word : wordDict) {
+            word_set.insert(word);
+        }
+        return solve(s);
     }
 };
 
+
+// 4th with memo and submitted
+
+class Solution {
+public:
+    
+    unordered_set<string> word_set;
+    unordered_map<string, bool> memo;
+    
+    bool solve(string s) {
+        
+        if(s.size() == 0) return true;
+        
+        if(memo.find(s) != memo.end()) return  memo[s];
+        
+        for(int i=0; i<=s.size(); i++) {
+            string prefix = s.substr(0,i);
+            if(word_set.find(prefix) != word_set.end()) {
+                string remaining_str = s.substr(i);
+                if(solve(remaining_str)) {
+                    memo[s] = true;
+                    return true;
+                }
+            }
+        }
+        memo[s] = false;
+        return false;
+    }
+    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        // assign all wordDict to set
+        for(auto word : wordDict) {
+            word_set.insert(word);
+        }
+        return solve(s);
+    }
+};

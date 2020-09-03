@@ -37,3 +37,28 @@ public:
         return false;
     }
 };
+
+
+
+
+
+
+// 2nd sol
+
+
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        // concatnating string
+        string ss = s + s;
+        // remove 1st and last char from ss
+        // Delete 1 character from index  0
+        ss.erase(0, 1);
+        // Delete 1 character from index last
+        ss.erase(ss.size()-1, 1);
+        cout<<ss;
+        // check if s present in ss or not
+        if(ss.find(s) != -1) return true;
+        return false;
+    }
+};

@@ -45,3 +45,33 @@ public:
         return max_heap.top();
     }
 };
+
+
+
+// or
+
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        
+        int r = matrix.size();
+        int c = matrix[0].size();
+        
+        // as kth min so taking max heap
+        priority_queue<int> max_heap;
+        
+        for(int i=0; i<r; i++) {
+            for(int j=0; j<c; j++) {
+                if(max_heap.size() < k) {
+                     max_heap.push(matrix[i][j]);
+                }
+                else {
+                    max_heap.push(matrix[i][j]);
+                    max_heap.pop(); 
+                }
+            }
+        }
+        return max_heap.top();
+    }
+};

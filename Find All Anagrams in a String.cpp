@@ -34,6 +34,7 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
 
 // code :-
 
+
 class Solution {
 public:
     map<char, int> pm;
@@ -41,10 +42,11 @@ public:
     
     bool isAnn()
     {
-        for(int i=0; i<pm.size(); i++)
+        for(auto ptr = pm.begin(); ptr != pm.end(); ptr++)
         {
-            if(pm['a'+i] != sm['a'+i]) 
-                return false;
+            char key = ptr->first;
+            
+            if(pm[key] != sm[key]) return false;
         }
         return true;
     }

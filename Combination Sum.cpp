@@ -33,19 +33,19 @@ public:
     vector<vector<int>> ans;
     vector<int> res;
     
-    void find_sum(vector<int> &can,int t,int ln,int currect)
+    void find_sum(vector<int> &can,int t,int ln,int index)
     {
         if(t==0)
         {
             ans.push_back(res);
             return;
         }
-        if(t < 0 || currect >=ln)
+        if(t < 0 || index >=ln)
             return;
-        res.push_back(can[currect]);
-        find_sum(can,t-can[currect],ln,currect);
+        res.push_back(can[index]);
+        find_sum(can,t-can[index],ln,index);
         res.pop_back();
-        find_sum(can,t,ln,currect+1);
+        find_sum(can,t,ln,index+1);
     }
     
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {

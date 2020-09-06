@@ -39,13 +39,13 @@ public:
             factorial*=i;
         }
         while(n){
-            int factor=factorial/n;
-            int pick = k%factor==0 ? k/factor-1 : k/factor;
-            k=k%factor ? k%factor : factor;
-            int i=0, count=0;
-            ans+=(v[pick]+'0');
-            v.erase(v.begin()+pick);
-            factorial/=n--;
+            int block_size = factorial/n;
+            int index = k % block_size == 0 ? (k/block_size) -1 : k/block_size;
+            k = k % block_size ? k % block_size : block_size;
+            ans+=(to_string(v[index]));
+            v.erase(v.begin()+index);
+            factorial = factorial/n;
+            n--;
         }
         return ans;
     }

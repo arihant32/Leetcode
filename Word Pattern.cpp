@@ -91,3 +91,59 @@ public:
         return true;
     }
 };
+
+
+
+
+// or
+
+
+
+
+class Solution {
+public:
+        
+    vector<string> words;
+    
+    void split(string s) {
+        string temp = "";
+        for(int i=0; i<s.size(); i++) {
+            if(s[i] == ' '){
+               words.push_back(temp);
+                temp = "";
+            }else{
+                temp += s[i];
+            }
+        }
+        words.push_back(temp);
+    }
+    
+    bool wordPattern(string pattern, string str) {
+        
+        split(str); 
+        
+        int w_size = words.size();
+        int p_size = pattern.size();
+        if(w_size != p_size) return false;
+        
+        unordered_map<char, string> ctw;
+        unordered_map<string, char> wtc;
+        
+        for(int i=0; i<pattern.size(); i++) {    
+            char c = pattern[i];
+            string w = words[i];
+            
+            if(ctw.find(c) == ctw.end())
+                 ctw[c] = w;
+            else if(ctw[c].compare(w) != 0)
+                return false;  
+            
+            if(wtc.find(w) == wtc.end()) 
+                 wtc[w] = c;
+            else if(wtc[w] != c)
+                return false;
+        }
+        
+        return true;
+    }
+};

@@ -69,16 +69,19 @@ public:
         else if(root->val < key)
             root->right = deleteNode(root->right, key);
         else {
+            // one child
             if(root->left == NULL){
                 TreeNode* temp = root->right;
                 delete(root);
                 return temp;
             }
+            // one child
             if(root->right == NULL){
                 TreeNode* temp = root->left;
                 delete(root);
                 return temp;
             }else{
+                // two childs
                 TreeNode* successor = get_inorder_successor(root->right);
                 root->val = successor->val;
                 root->right = deleteNode(root->right, successor->val);

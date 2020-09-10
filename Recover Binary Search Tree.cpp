@@ -108,4 +108,44 @@ public:
 
 
 
+// or without space
+
+
+
+class Solution {
+public:
+    
+    // Instead of storing inorder traversal we can store it's current node previour node to temp varibale and we use it to compare two node val that is not follow the BST
+    
+    TreeNode *first_pair = NULL, *second_pair = NULL, *pre_node = NULL;
+    
+    void do_inorder(TreeNode* root) {
+        
+        if(root == NULL) return;
+        
+        do_inorder(root->left);
+        // if we have it's pre_node then only need to compare with it's current node
+        if(pre_node != NULL) {
+            // checking if not follow the BST property
+            if(pre_node->val > root->val) {
+                if(first_pair == NULL){
+                    first_pair = pre_node;
+                }
+                second_pair = root;  
+            }
+        }
+        // to store each node previous node address
+        pre_node = root;
+        do_inorder(root->right);
+    }
+        
+    void recoverTree(TreeNode* root) {
+        do_inorder(root);
+        // swap it now
+        int t = first_pair->val;
+        first_pair->val = second_pair->val;
+        second_pair->val = t;
+    }
+};
+
 

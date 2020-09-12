@@ -52,3 +52,40 @@ public:
         return results;
     }
 };
+
+
+
+// 2nd solution
+
+
+
+
+class Solution {
+public:
+    
+    vector<vector<int>> results;
+    vector<int> temp;
+    
+    void solve(int k, int n, int index) {
+        if(n < 0 || temp.size() > k) 
+            return;
+        
+        if(temp.size() == k && n==0) {
+            results.push_back(temp);
+            return;
+        }
+        
+        for(int i=index; i<=9; i++) {
+            temp.push_back(i);
+            solve(k, n-i, i+1);
+            temp.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        solve(k, n, 1);
+        return results;
+    }
+};
+
+
+

@@ -52,7 +52,7 @@ public:
         
         // odd case
         if(k%2 != 0)
-            // starting iterator, distance (from which position element address u want)
+            // starting iterator, distance (which position element address u want)
             median = *next(mset.begin(), ind);
         else
             // even case

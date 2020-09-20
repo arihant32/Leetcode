@@ -26,9 +26,15 @@ class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         vector<vector<int>> result;
+        
         set<vector<int>> s;
+        
         int ln = nums.size();
+        
         int pset_count = pow(2,ln);
+        
+        sort(nums.begin(),nums.end());
+        
         for(int i=0; i<pset_count; i++) {
             vector<int> temp;
             for(int j=0; j<ln; j++) {
@@ -36,7 +42,6 @@ public:
                     temp.push_back(nums[j]);
                 }
             }
-            sort(temp.begin(),temp.end());
             s.insert(temp);
         }
         for(auto v : s) result.push_back(v);

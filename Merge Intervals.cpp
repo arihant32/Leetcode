@@ -22,17 +22,22 @@ public:
         
         vector<vector<int>> ans;
         sort(vv.begin(),vv.end());
-        for(int i=0;i<vv.size();i++)
-        {
-            int k=i;
-            int x=vv[i][0],y=vv[i][1];
+        
+        int i=0;
+        int x, y;
+        
+        while(i < vv.size()) {
+            
+            x=vv[i][0];
+            y=vv[i][1];
+            
             for(int j=i+1;j<vv.size();j++)
             {
                if(y >= vv[j][0])
                {
                    if(y < vv[j][1])
                        y=vv[j][1];
-                   k++;
+                   i++;
                }
               else
               {
@@ -40,10 +45,12 @@ public:
                   break;
               }
             }
-            if(k+1==vv.size())
-                ans.push_back({x,y});
-            i=k;
+            
+            if(i+1 == vv.size()) ans.push_back({x,y});
+            
+            i++;
         }
+        
         return ans;
     }
 };

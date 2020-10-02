@@ -54,3 +54,33 @@ public:
     }
     
 };
+
+
+
+// or
+
+
+class Solution {
+public:
+    
+    vector<vector<int>> results;
+    vector<int> temp;
+    
+    void generate_combination(vector<int>& candidates, int target, int index) {
+        if(target == 0)
+            results.push_back(temp);
+        
+        if(target < 0 || index >= candidates.size())
+            return;
+        
+        for(int i = index; i<candidates.size(); i++) {
+            temp.push_back(candidates[i]);
+            generate_combination(candidates, target - candidates[i], i);
+            temp.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        generate_combination(candidates, target, 0);
+        return results;
+    }
+};

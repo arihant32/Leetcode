@@ -88,7 +88,7 @@ public:
         
     TrieNode* root;
     
-    void inser(string word) {
+    void insert(string word) {
         TrieNode *ptr = root;
         for(int i=0; i<word.size(); i++){
             int index = word[i] - 'a';
@@ -128,11 +128,12 @@ public:
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         
         vector<string> results;
+        
         root = new TrieNode();
         
         for(auto word : words) {
             // to avoid empty string
-            if(word.size() >0) inser(word);
+            if(word.size() >0) insert(word);
         }
         
         for(auto word : words) {

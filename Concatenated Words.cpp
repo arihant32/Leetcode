@@ -69,3 +69,77 @@ public:
         return results;
     }
 };
+
+
+
+// 2nd solution using TRIE
+
+
+
+class TrieNode {
+    public:
+    
+    TrieNode* child[26] = {NULL};
+    bool isEOW = false;
+};
+
+class Solution {
+public:
+        
+    TrieNode* root;
+    
+    void inser(string word) {
+        TrieNode *ptr = root;
+        for(int i=0; i<word.size(); i++){
+            int index = word[i] - 'a';
+            if(ptr->child[index] == NULL)
+                ptr->child[index] = new TrieNode();
+            ptr = ptr->child[index];
+        }
+        ptr->isEOW = true;
+    }
+   
+    bool solve(string word, int match_count) {
+        
+        TrieNode* ptr = root;
+        
+        if(word.size() == 0 && match_count>=2)
+            return true;
+        
+        for(int i=0; i<word.size(); i++) {
+            
+            int ind = word[i] - 'a';
+            
+            if(ptr->child[ind] == NULL)
+                return false;
+            
+            ptr = ptr->child[ind];
+            
+            if(ptr->isEOW == true){
+                if(solve(word.substr(i+1), match_count+1)){
+                    return true;
+                }   
+            }
+            
+        }
+        return false;
+    }
+    
+    vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        
+        vector<string> results;
+        root = new TrieNode();
+        
+        for(auto word : words) {
+            // to avoid empty string
+            if(word.size() >0) inser(word);
+        }
+        
+        for(auto word : words) {
+            //to avoid empty string
+            if(word.size() >0 && solve(word, 0)) results.push_back(word);
+        }
+        
+        return results;
+    }
+};

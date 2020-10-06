@@ -34,6 +34,8 @@ int cutRod(vector<int> &prices, int rodLen) {
     
     int maxProfix = INT_MIN;
     
+    //Recursively cut the rod in different pieces
+    
     for(int i=1; i<=rodLen; i++){
         maxProfix = max(maxProfix, prices[i-1] + cutRod(prices, rodLen - i));
     }

@@ -92,3 +92,12 @@ int main()
 		printf("No subset with given sum"); 
 	return 0; 
 } 
+
+
+
+// DP solution
+
+
+https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+
+

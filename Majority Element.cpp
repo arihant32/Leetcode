@@ -21,8 +21,8 @@ Output: 2
 class Solution {
 public:
     int getCandidate(vector<int>& nums) {
-        int count = 1, maj_index = 0;
-        for(int i = 1; i<nums.size(); i++) {
+        int count = 0, maj_index = 0;
+        for(int i = 0; i<nums.size(); i++) {
             if(nums[maj_index] == nums[i]) 
                 count++;
             else

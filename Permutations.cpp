@@ -21,9 +21,9 @@ class Solution {
 public:
     vector<vector<int>> ans;
     
-    void to_permute(vector<int> &v,int i,int n)
+    void to_permute(vector<int> &v,int index,int n)
     {
-        if(i==n)
+        if(index==n)
         {
             vector<int> res;
             for(int k=0;k<n;k++)
@@ -31,15 +31,15 @@ public:
             ans.push_back(res);
             return;
         }
-        for(int j=i;j<n;j++)
+        for(int i=index; i<n; i++)
         {
-            int temp = v[i];
-            v[i] = v[j];
-            v[j] = temp;
-            to_permute(v,i+1,n);
-            temp=v[i];
-            v[i] = v[j];
-            v[j] = temp;
+            int temp = v[index];
+            v[index] = v[i];
+            v[i] = temp;
+            to_permute(v, index+1,n);
+            temp = v[index];
+            v[index] = v[i];
+            v[i] = temp;
         }
 
     }

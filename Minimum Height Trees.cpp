@@ -92,3 +92,52 @@ public:
         return answer;
     }
 };
+
+// in above solution have TLE for one test case so in below solution making graph using map not using adj matrix
+
+
+class Solution {
+public:
+    vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
+        if(n==1) return {0};
+        unordered_map<int, unordered_set<int>> adj;
+        int adj_size = n;
+        vector<int> in_degree(n,0);
+        queue<int> leaf;
+        vector<int> answer;
+        for(auto edge : edges) {
+            int s = edge[0];
+            int d = edge[1];
+            adj[s].insert(d);
+            adj[d].insert(s);
+            in_degree[s]++;
+            in_degree[d]++;
+        }
+        // in_degree one then a leaf node
+        for(int i=0; i<n; i++) {
+            if(in_degree[i] == 1) leaf.push(i);
+        }
+        // will delete the leaf node until only <=2 node left in the tree
+        while(n>2) {
+            int q_size = leaf.size();
+            for(int i=0; i<q_size; i++){
+                int v = leaf.front();
+                leaf.pop();
+                for(auto nei : adj[v]) {
+                    adj[nei].erase(v);
+                    in_degree[nei]--;
+                    if(in_degree[nei] == 1)
+                        leaf.push(nei);
+                }
+            }
+            n = n - q_size;
+        }
+        
+        while(!leaf.empty()){
+            answer.push_back(leaf.front());
+            leaf.pop();
+        }
+        
+        return answer;
+    }
+};
